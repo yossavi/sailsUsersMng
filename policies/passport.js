@@ -38,8 +38,10 @@ module.exports = function (req, res, next) {
 					delete obj._activeted_;
 					process.nextTick(callback);
 				} else {
-					activeBeforeSend(obj[keys[i]], keys[i], function() {
-						process.nextTick(function() {active(i+1)});
+					setImmediate(function() {
+						activeBeforeSend(obj[keys[i]], keys[i], function() {
+							process.nextTick(function() {active(i+1)});
+						});
 					});
 				}
 			}

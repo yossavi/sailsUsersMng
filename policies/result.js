@@ -55,23 +55,26 @@ function validate(Model, paramKey, paramValue, req, res, id, allow, callback) {
 									done = true;
 									return res.send(404);
 								}
+								return setImmediate(function() {
+									validateAll(paramValue, req, res, model, allow, function(data) {
+										if(foundModel[paramKey]) {
+											data.id = foundModel[paramKey].id;
+										}
+										done = true;
+										return process.nextTick(function() {callback(data)});
+
+									});
+								});
+							});
+						} else {
+							return setImmediate(function() {
 								validateAll(paramValue, req, res, model, allow, function(data) {
-									if(foundModel[paramKey]) {
-										data.id = foundModel[paramKey].id;
+									if(paramValue.id) {
+										data.id = paramValue.id;
 									}
 									done = true;
 									return process.nextTick(function() {callback(data)});
-
 								});
-
-							});
-						} else {
-							return validateAll(paramValue, req, res, model, allow, function(data) {
-								if(paramValue.id) {
-									data.id = paramValue.id;
-								}
-								done = true;
-								return process.nextTick(function() {callback(data)});
 							});
 						}
 
