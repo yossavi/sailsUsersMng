@@ -11,6 +11,17 @@
  * is accomodated by having a single `token` object in the Passport model that
  * can contain any combination of tokens issued by the authentication API.
  */
-module.exports = {
-    local: require('./local'), oauth: require('./oauth'), oauth2: require('./oauth2'), openid: require('./openid')
+module.exports = function(localFncs){
+	var protocols = {
+		oauth: require('./oauth'),
+		oauth2: require('./oauth2'),
+		openid: require('./openid')
+	};
+	
+	if (localFncs) {
+		protocols.local = localFncs;
+	} else {
+		protocols.local = require('./local');
+	}
+	return protocols;
 };
