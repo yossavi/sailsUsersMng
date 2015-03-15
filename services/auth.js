@@ -3,43 +3,6 @@
  */
 module.exports = {
 
-	policy: function(allowedArr, req, res, callback, ids, isFailSend) {
-		function validate(i) {
-			if(i == allowedArr.length) {
-				if (!isFailSend) {
-					return callback(false);
-				} else {
-					return res.forbidden('You are not permitted to perform this action.');
-				}
-			} else {
-				if(allowedArr[i]=='public') {
-					return callback(true);
-				} else if(allowedArr[i]=='superAdmin') {
-					if (req.isAuthenticated() && req.user && req.user.admin && req.user.admin.level>1) {
-						return callback(true);
-					} else {
-						validate(i+1);
-					}
-				} else if(allowedArr[i]=='user') {
-					if (req.isAuthenticated() && req.user) {
-						return callback(true);
-					} else {
-						validate(i+1);
-					}
-				} else if(allowedArr[i]=='curUser') {
-					if (req.isAuthenticated() && req.user && req.user.id == ids[i][req.options.model][req.options.action]) {
-						return callback(true);
-					} else {
-						validate(i+1);
-					}
-				} else {
-					console.log('auth '+allowedArr[i]+' is not exist');
-					return res.serverError("Server Error");
-				}
-			}
-		}
-		validate(0);
-	},
 	toJSON: function(thisObj) {
 		var ret = {id: thisObj.id};
 

@@ -8,7 +8,7 @@
  *
  */
 
-var actionUtil = require('../../node_modules/sails/lib/hooks/blueprints/actionUtil');
+var actionUtil = require('../../sails/lib/hooks/blueprints/actionUtil');
 
 function validate(Model, paramKey, paramValue, req, res, id, allow, callback) {
 	var done = false;
@@ -124,13 +124,7 @@ function validateAll(data, req, res, Model, allow, callback) {
 	}
 }
 
-module.exports = function (req, res, next) {
-	var trivial = {
-		superAdmin: ['admin', 'curUser', 'public', 'user'],
-		admin: ['curUser', 'public', 'user'],
-		curUser: ['public', 'user'],
-		user: ['public']
-	}
+module.exports = function (req, res, next, trivial) {
 	var extendedPassed = [];
 	for(var i=0; i<res.passed.length; i++) {
 		extendedPassed.push(res.passed[i]);

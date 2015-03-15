@@ -69,24 +69,4 @@ module.exports = function (req, res, next) {
 		});
 
 	}
-
-    passport.initialize()(req, res, function () {
-        // Use the built-in sessions
-        passport.session()(req, res, function () {
-	        res.isAuth = false;
-	        if (req.user) {
-		        User.findOne({id: req.user.id}).populate('admin').exec(function(err, user) {
-			        if (err) {
-				        return res.serverError("Server Error");
-			        }
-
-					req.user = user;
-					next();
-		        });
-	        } else {
-		        next();
-	        }
-
-        });
-    });
 };
