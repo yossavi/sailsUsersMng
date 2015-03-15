@@ -1,22 +1,22 @@
 {
-    "name": "sailsUserMng",
-    "private": false,
-    "version": "0.0.0",
-    "description": "A user management and authentication for sails js",
-    "keywords": [],
-    "dependencies": {
-        "passport": "",
-        "passport-local": "",
-        "passport-twitter": "",
-        "passport-facebook": "",
-        "passport-google-oauth": "",
-        "bcryptjs": "",
-        "validator": ""
-    },
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/anonymous node/sails user/api.git"
-    },
-    "author": "yossavi",
-    "license": ""
+  "name": "sailsUsersMng",
+  "private": false,
+  "version": "0.0.0",
+  "description": "A users management and authentication for sails js",
+  "keywords": [],
+  "dependencies": {
+    "passport": "",
+    "passport-local": "",
+    "passport-twitter": "",
+    "passport-facebook": "",
+    "passport-google-oauth": "",
+    "bcryptjs": "",
+    "validator": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yossavi/sailsUsersMng"
+  },
+  "author": "yossavi",
+  "license": "ISC"
 }
