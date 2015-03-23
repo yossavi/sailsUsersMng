@@ -78,12 +78,98 @@ module.exports = auth;
 module.exports = require('sailsUsersMng/services/passport');
 ```
 
+add the following code to your sails files:
+* .../config/bootstrap.js with the code:
+```Cycript
+module.exports.bootstrap = function (cb) {
+	sails.services.passport.loadStrategies();
+	cb();
+};
+```
+* .../config/local.js with the code:
+```Cycript
+module.exports = {
+	proxyHost: 'YOUR_SERVER_URL'
+};
+```
+
+* .../config/passport.js with the code:
+```Cycript
+module.exports.passport = {
+  local: {
+    strategy: require('passport-local').Strategy
+  },
+
+  twitter: {
+    name: 'Twitter',
+    protocol: 'oauth',
+    strategy: require('passport-twitter').Strategy,
+    options: {
+      consumerKey: '...',
+      consumerSecret: '...'
+    }
+  },
+
+  facebook: {
+    name: 'Facebook',
+    protocol: 'oauth2',
+    strategy: require('passport-facebook').Strategy,
+    options: {
+      clientID: '...',
+      clientSecret: '...'
+    },
+    scope: ['email', 'public_profile']
+  },
+
+  google: {
+    name: 'Google',
+    protocol: 'oauth2',
+    strategy: require('passport-google-oauth').OAuth2Strategy,
+    options: {
+      clientID: '...',
+      clientSecret: '...'
+    },
+    scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/plus.me']
+  }
+};
+```
+
+* .../config/policies.js with the code:
+```Cycript
+module.exports.policies = {
+	'*': ['passport', 'superAdmin', 'result'],
+	SOMEController: {
+		find: ['passport', 'superAdmin', 'SOME_POLICY', 'result'],
+		findOne: ['passport', 'superAdmin', 'result'],
+		create: ['passport', 'superAdmin', 'result'],
+		update: ['passport', 'superAdmin', 'ANOTHER_POLICY', 'result'],
+		destroy: ['passport', 'superAdmin', 'result'],
+		populate: ['passport', 'superAdmin', 'result'],
+		add: ['passport', 'superAdmin', 'result'],
+		remove: ['passport', 'superAdmin', 'result']
+	}
+};
+```
+
+* .../config/routes.js with the code:
+```Cycript
+module.exports.routes = {
+	'post /auth/local': 'AuthController.callback',
+    'post /auth/local/:action': 'AuthController.callback',
+
+    'get /auth/logout': 'AuthController.logout',
+    'get /auth/:provider': 'AuthController.provider',
+    'get /auth/:provider/callback': 'AuthController.callback',
+    'get /auth/:provider/:action': 'AuthController.callback'
+};
+```
+
 ## TODO
-* explain the required configuration needed in config folder
+* explain the required configuration needed in policies folder
 * explain the required configuration needed in every model
 * add the package to npm
 
 ##Contact
-if you want to get more information, explanation or help, please contact me in: yossef@anattour.co.il
+if you want to get more information, explanation or help, please contact me
 
 thanks.
