@@ -30,7 +30,16 @@ function validate(Model, paramKey, paramValue, req, res, id, allow, callback) {
 				}
 				if (Model.attributes && Model.attributes[paramKey] && (Model.attributes[paramKey].model || Model.attributes[paramKey].collection)) {
 					if (Model[allow][res.passed[index]][paramKey].replace) {
-						if (paramValue instanceof Object && paramValue.id) {
+						if (paramValue instanceof Array) {
+							var retArr = [];
+							for (var j=0; j<paramValue.length; j++) {
+								if (paramValue[j].id) {
+									retArr.push(paramValue[j].id);
+								}
+							}
+							done = true;
+							return process.nextTick(function() {callback(retArr)});
+						} else if (paramValue instanceof Object && paramValue.id) {
 							done = true;
 							return process.nextTick(function() {callback(paramValue.id)});
 						} else if (!(paramValue instanceof Object)) {
