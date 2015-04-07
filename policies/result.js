@@ -65,9 +65,9 @@ function validate(Model, paramKey, paramValue, req, res, id, allow, callback) {
 									return res.send(404);
 								}
 								return setImmediate(function() {
-									validateAll(paramValue, req, res, model, allow, function(data) {
-										if(foundModel[paramKey]) {
-											data.id = foundModel[paramKey].id;
+									validateAll(paramValue[0], req, res, model, allow, function(data) {
+										if(foundModel[paramKey][0]) {
+											data.id = foundModel[paramKey][0].id;
 										}
 										done = true;
 										return process.nextTick(function() {callback(data)});
@@ -77,7 +77,7 @@ function validate(Model, paramKey, paramValue, req, res, id, allow, callback) {
 							});
 						} else {
 							return setImmediate(function() {
-								validateAll(paramValue, req, res, model, allow, function(data) {
+								validateAll(paramValue[0], req, res, model, allow, function(data) {
 									if(paramValue.id) {
 										data.id = paramValue.id;
 									}
