@@ -25,6 +25,7 @@ module.exports = {
 				ret[thisObj.allowedRead[i]] = thisObj[thisObj.allowedRead[i]];
 			}
 		}
+		
 		return ret;
 	},
 	updateAllow: function(thisObj, req, res) {

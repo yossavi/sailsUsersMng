@@ -55,7 +55,7 @@ module.exports = function (req, res, next) {
 				}
 				obj._activeted_ = true;
 				if(obj.beforeSend) {
-					obj.beforeSend(req, res, data, function(data) {
+					obj.beforeSend(req, res, obj, function(obj) {
 						process.nextTick(function() {afterSend(obj, callback)});
 					});
 				} else {
