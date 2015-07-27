@@ -1,7 +1,7 @@
 # sailsUsersMng
 
 this library can be integrated in sails projects, in order to help manage and authenticate users, and every read/write action of them.
-this library using passport.js
+this library uses passport.js
 
 ##installation
 
