@@ -7,7 +7,7 @@ this library uses passport.js
 
 add to your package.json file, the line:
 ```Cycript
-"sailsUsersMng": "git://github.com/yossavi/sailsUsersMng.git"
+"sails-users-mng ": ""
 ```
 run in terminal:
 ```
@@ -167,7 +167,6 @@ module.exports.routes = {
 ## TODO
 * explain the required configuration needed in policies folder
 * explain the required configuration needed in every model
-* add the package to npm
 
 ##Contact
 if you want to get more information, explanation or help, please contact me
