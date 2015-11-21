@@ -33,7 +33,7 @@ module.exports = require('sails-users-mng/models/Passport');
 * .../api/policies/passport.js with the code:
 ```Cycript
 module.exports = function (req, res, next) {
-	require('sailsUsersMng/policies/passport')(req, res, next);
+	require('sails-users-mng/policies/passport')(req, res, next);
     passport.initialize()(req, res, function () {
         passport.session()(req, res, function () {
 	        res.isAuth = false;
