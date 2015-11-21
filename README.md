@@ -16,19 +16,19 @@ npm install
 add the following files to your sails project:
 * .../api/controllers/AuthController.js with the code:
 ```Cycript
-module.exports = require('sailsUsersMng/controllers/AuthController');
+module.exports = require('sails-users-mng/controllers/AuthController');
 ```
 * .../api/controllers/UserController.js with the code:
 ```Cycript
-module.exports = require('sailsUsersMng/controllers/UserController');
+module.exports = require('sails-users-mng/controllers/UserController');
 ```
 * .../api/models/Auth.js with the code:
 ```Cycript
-module.exports = require('sailsUsersMng/models/Auth');
+module.exports = require('sails-users-mng/models/Auth');
 ```
 * .../api/models/Passport.js with the code:
 ```Cycript
-module.exports = require('sailsUsersMng/models/Passport');
+module.exports = require('sails-users-mng/models/Passport');
 ```
 * .../api/policies/passport.js with the code:
 ```Cycript
@@ -62,12 +62,12 @@ module.exports = function (req, res, next) {
 		curUser: ['public', 'user'],
 		user: ['public']
 	}
-	require('sailsUsersMng/policies/result')(req, res, next, trivial);
+	require('sails-users-mng/policies/result')(req, res, next, trivial);
 };
 ```
 * .../api/services/auth.js with the code:
 ```Cycript
-var auth = require('sailsUsersMng/services/auth');
+var auth = require('sails-users-mng/services/auth');
 auth.policy = function(allowedArr, req, res, callback, ids, isFailSend) {
   ...
 }
@@ -75,7 +75,7 @@ module.exports = auth;
 ```
 * .../api/services/passport.js with the code:
 ```Cycript
-module.exports = require('sailsUsersMng/services/passport');
+module.exports = require('sails-users-mng/services/passport');
 ```
 
 add the following code to your sails files:
