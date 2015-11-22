@@ -4,7 +4,7 @@
 module.exports = {
 	schema: true,
 	allowWrite: {
-		public: {identifier: true, password: true, firstname: true, usermail: true, provider: true, code: true},
+		public: {identifier: true, password: true, firstname: true, lastname: true, usermail: true, provider: true, code: true},
 		superAdmin: {'*': true}
 	}
 };
