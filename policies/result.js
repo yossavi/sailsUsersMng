@@ -78,7 +78,7 @@ function validate(Model, paramKey, paramValue, req, res, id, allow, callback) {
 						} else {
 							return setImmediate(function() {
 								validateAll(paramValue[0], req, res, model, allow, function(data) {
-									if(paramValue.id) {
+									if(paramValue.id && data) {
 										data.id = paramValue.id;
 									}
 									done = true;
